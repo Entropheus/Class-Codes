@@ -1,0 +1,36 @@
+NFTcollection = new Array();
+
+function mintNFT() {
+    let nameInput = prompt("\nPlease Enter The Name Of The NFT:\n")
+    var NFT = {"Name": "", "Value": "", "Data ID": ""};
+    NFT["Name"] = nameInput;
+    NFT["Value"] = (Math.random() * 100).toFixed(5)+" WETH";
+    NFT["Data ID"] = (Math.floor(Math.random()*1e20).toString(36));
+    NFT.toString();
+    NFTcollection.push(NFT)
+    console.log("\nNFT Minting Information:\n")
+    console.log(NFT)
+    
+    let C1 = prompt("\nDo You Wish To Add Another NFT? Y/N\n");
+    
+    if (C1 == "Y" || C1 == "y") { mintNFT(); }
+    
+    else if (C1 == "N" || C1 == "n") { return; }
+}
+
+function listNFT() {
+    console.log("Current NFTs In Collection:\n");
+    NFTcollection.forEach(function(entry) { console.log(entry); })
+    
+}
+
+function getTotalSupply() {
+    let quantity = NFTcollection.length;
+    
+    console.log("\nTotal Number of NFTs Currently In Collection:",quantity)
+    
+}
+
+mintNFT();
+listNFT();
+getTotalSupply();
