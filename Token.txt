@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+
+contract CrystalToken is ERC20, Ownable{
+
+    mapping(address => uint256) balances;
+
+    constructor(address _initialOwner) ERC20("Crystal Token", "CRX") Ownable(_initialOwner) {
+
+        if (_initialOwner == address(0)) {
+            revert OwnableInvalidOwner(address(0));
+        }
+        _mint(msg.sender, 5*10**5);
+        _transferOwnership(_initialOwner);
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    function burn(address from, uint256 amount) public {
+        _burn(from, amount);
+
+    }
+}
