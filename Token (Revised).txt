@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+import "hardhat/console.sol";
+
+contract CrystalToken is Ownable{
+
+    string public Name = "Crystal Token";
+    string public Ticker = "CRX";
+    uint256 public Supply = 0;
+    mapping(address => uint256) public balances;
+
+constructor(address Owner) Ownable(Owner) {
+    if (Owner == address(0)) {
+            revert OwnableInvalidOwner(address(0));
+        }
+
+    transferOwnership(Owner);    
+}
+
+    function mint (address to, uint256 amount) onlyOwner public {
+        Supply += amount;
+        balances[to] += amount;   
+    }
+
+    function burn (address from, uint256 amount) onlyOwner public {
+        if (balances[from] >= amount) {
+            Supply -= amount;
+            balances[from] -= amount;
+        }
+        else if (balances[from] < amount) {
+            console.log("Token Balance of Address is Lower Than The Burn Amount Specified.");
+        }
+    }
+}
