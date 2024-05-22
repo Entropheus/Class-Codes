@@ -1,7 +1,7 @@
 # Class-Codes
 Code Storage for all my codes created throughout my college life
 
-# Token(Revised).txt
+# Token.txt
 This Solidity program is a simple smart contract that can perform basic minting and burning of a specified token to a specified address. The contract is also ownable, only allowing the designated owner address to be the one able to execute the contract
 
 ## JS Proof Beginner Course.txt
