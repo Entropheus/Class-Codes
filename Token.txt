@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "hardhat/console.sol";
+
+contract CrystalToken{
+
+    string public Name = "Crystal Token";
+    string public Ticker = "CRX";
+    uint256 public Supply = 0;
+    mapping(address => uint256) public balances;
+
+    function mint (address to, uint256 amount) public {
+        Supply += amount;
+        balances[to] += amount;   
+    }
+
+    function burn (address from, uint256 amount) public {
+        if (balances[from] >= amount) {
+            Supply -= amount;
+            balances[from] -= amount;
+        }
+        else if (balances[from] < amount) {
+            console.log("Token Balance of Address is Lower Than The Burn Amount Specified.");
+        }
+    }
+}
